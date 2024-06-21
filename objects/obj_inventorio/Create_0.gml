@@ -10,12 +10,12 @@ inventory.item_add("Heroi",1,spr_heroi)
 inventory.item_add("Heroi",2,spr_heroi)
 inventory.item_add("Heroi",3,spr_heroi)
 inventory.item_add("Vilao",10,spr_vilao)
-show_debug_message(inventory)
+
 
 inventory.item_subtract("Heroi",1);
 inventory.item_subtract("Vilao",1);
 
-show_debug_message(inventory)
+
 
 
 // UI information

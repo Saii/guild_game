@@ -110,7 +110,7 @@ draw_set(-1)
 
 
 // draw inventory place holders
-missao_numero = obj_missao.missao_comprada.missao_get();
+missao_numero = obj_missao.missao_comprada.missao_comprada_get();
 heroi_numero = obj_herois.heroi.heroi_get();
 
 for (var row = 0; row < inventory_rows_missao; row++) {
@@ -149,12 +149,6 @@ for (var row = 0; row < inventory_rows_missao; row++) {
 		}
 		
 		
-		//var inventory_index = (row * inventory_columns) + column;
-		//if(inventory_index <= array_length(inventory_items) - 1) {
-		//	// draw inventory sprite
-		//	draw_sprite(inventory_items[inventory_index].sprite, 0, pos_x + ui_inventory_box/2, pos_y+ ui_inventory_box/2);
-		//}
-		
 		//// if our mouse is between one of the columns let's highlight it
 		if(is_between(mx, pos_x, pos_x + ui_inventory_box)) {
 			if(is_between(my, pos_y, pos_y + ui_inventory_box)) {
@@ -169,16 +163,112 @@ for (var row = 0; row < inventory_rows_missao; row++) {
 				draw_reset();
 			}
 		}
-		
-		
-		
-		
+				
 	}
 }
 
+// Desenhar os slots de herois para as missões
+
+for ( var missoes_compradas_array =0; missoes_compradas_array < array_length(missao_numero);missoes_compradas_array++){
+	for (var row = 0; row < array_length(missao_numero); row++) {
+		var pos_y = ui_padding_y + (ui_border_size * 13) +	(row * (ui_inventory_margin + ui_inventory_box));
+
+
+   for (var column = 0; column < missao_numero[row].requisito_heroi_numero; column++) {
+		var pos_x = ui_padding_x + ui_border_size + (ui_inventory_padding*2) + (column * (ui_inventory_margin + ui_inventory_box)) + ui_inventory_box;
+		
+		// draw offset sprite for shadow
+		draw_sprite_ext(
+			spr_Inventory_Box,
+			0,
+			pos_x + 4,
+			pos_y + 4,
+			1,
+			1,
+			0,
+			c_black,
+			0.4
+		);
+		
+		// draw inventory box sprite
+		//if(column <= missao_numero[missoes_compradas_array].requisito_heroi_numero){
+		draw_sprite_stretched_ext(spr_Inventory_Box, 0, pos_x, pos_y,64,64,c_white,1);
+		
+		//}
+		//
+		
+		//show_debug_message("A missao_compradas_array index eh: " + string(missoes_compradas_array))
+		//show_debug_message("A Row eh: " + string(row))
+		//show_debug_message("A Column eh: " + string(column))
+		//show_debug_message("A missao_compradas_array index eh: " + string(missoes_compradas_array))
+		//show_debug_message("A missao numero [] eh: " + string(missao_numero[missoes_compradas_array].requisito_heroi_numero))
+		
+	
+		
+		
+		//// if our mouse is between one of the columns let's highlight it
+		if(is_between(mx, pos_x, pos_x + ui_inventory_box)) {
+			if(is_between(my, pos_y, pos_y + ui_inventory_box)) {
+				draw_set(color_inventory_highlight, 0.2);
+				draw_rectangle(
+					pos_x,
+					pos_y,
+					pos_x + ui_inventory_box,
+					pos_y + ui_inventory_box,
+					false
+				);
+				draw_reset();
+				}
+			}
+				
+		}
+	}
+}
+
+//Fim desenho Slot missoes
+
+
+//  Inicio Desenhar os slots de herois para alocar nas missões
+
+for ( var missoes_compradas_array =0; missoes_compradas_array < array_length(missao_numero);missoes_compradas_array++){
+	
+	for (var row = 0; row < array_length(missao_numero); row++) {
+		var pos_y = ui_padding_y + (ui_border_size * 13) +	(row * (ui_inventory_margin + ui_inventory_box));
+
+
+   for (var column = 0; column < missao_numero[row].requisito_heroi_numero; column++) {
+		var pos_x = ui_padding_x + ui_border_size + (ui_inventory_padding*2) + (column * (ui_inventory_margin + ui_inventory_box)) + ui_inventory_box;
+		
+		
+		
+	
+	
+	
+	var heroi_index = (column);
+	var missao_index = array_length(missao_numero)
+
+	
+		if(heroi_index <= missao_numero[row].requisito_heroi_numero - 1) {
+			
+			// É necessário adicionar um loop para ir até o index existente dentro do heroi alocado para ver
+			//se existe um sprite ou não dentro do heroi alocado
+			
+			sprite = missao_numero[row].heroi_alocado[heroi_index].sprite
+			if(  sprite != -1){
+			draw_sprite_stretched(missao_numero[row].heroi_alocado[heroi_index].sprite,image_index,pos_x,pos_y,64,64)
+			}
+			
+		}
+	
+				
+		}
+	}
+}
+
+//Fim desenho Slot Heroi nas missoes
+
 for (var row = 0; row < inventory_rows_heroi; row++) {
-	var pos_y = ui_padding_y + (ui_border_size * 13) +
-	(row * (ui_inventory_margin + ui_inventory_box));
+	var pos_y = ui_padding_y + (ui_border_size * 13) +	(row * (ui_inventory_margin + ui_inventory_box));
 	
     for (var column = 0; column < inventory_columns_heroi; column++) {
 		var pos_x = ui_padding_x + ui_panel_left + ui_border_size + ui_inventory_padding + (column * (ui_inventory_margin + ui_inventory_box));
@@ -198,24 +288,18 @@ for (var row = 0; row < inventory_rows_heroi; row++) {
 		
 		// draw inventory box sprite
 		draw_sprite_stretched_ext(spr_Inventory_Box, 0, pos_x, pos_y,64,64,c_white,1);
-		
+		//show_debug_message("POS X" + string(pos_x))
+		//show_debug_message("POS Y" + string(pos_y))
 		//
 		var heroi_index = (row * inventory_columns_heroi) + column;
-		if(heroi_index <= array_length(missao_numero) - 1) {
+		if(heroi_index <= array_length(heroi_numero) - 1) {
 			// draw inventory sprite
-			draw_set(c_white, 1);
-			draw_text( pos_x + ui_inventory_box/2, pos_y+ ui_inventory_box/2,heroi_numero[heroi_index].nome);
-			draw_reset();
+			
+			draw_sprite_stretched(heroi_numero[heroi_index].sprite,image_index,pos_x + 4, pos_y+ ui_inventory_box/8,64,64)
+			
 
 		}
-		
-		
-		//var inventory_index = (row * inventory_columns) + column;
-		//if(inventory_index <= array_length(inventory_items) - 1) {
-		//	// draw inventory sprite
-		//	draw_sprite(inventory_items[inventory_index].sprite, 0, pos_x + ui_inventory_box/2, pos_y+ ui_inventory_box/2);
-		//}
-		
+			
 		//// if our mouse is between one of the columns let's highlight it
 		if(is_between(mx, pos_x, pos_x + ui_inventory_box)) {
 			if(is_between(my, pos_y, pos_y + ui_inventory_box)) {

@@ -2,6 +2,7 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 para obter mais informações
 
 global.dinheiro =300;
+global.heroi_id=0;
 //variaveis do inventario
 global.inventario_aberto=false;
 global.inventario_fechado=false;

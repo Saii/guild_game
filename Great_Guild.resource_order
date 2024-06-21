@@ -29,6 +29,7 @@
     {"name":"VariavelGlobal","order":2,"path":"scripts/VariavelGlobal/VariavelGlobal.yy",},
     {"name":"spr_hero_home","order":1,"path":"sprites/spr_hero_home/spr_hero_home.yy",},
     {"name":"spr_heroi","order":2,"path":"sprites/spr_heroi/spr_heroi.yy",},
+    {"name":"spr_heroi_1","order":9,"path":"sprites/spr_heroi_1/spr_heroi_1.yy",},
     {"name":"spr_iniciar_missao","order":8,"path":"sprites/spr_iniciar_missao/spr_iniciar_missao.yy",},
     {"name":"spr_Inventory_Box","order":3,"path":"sprites/spr_Inventory_Box/spr_Inventory_Box.yy",},
     {"name":"spr_missao","order":6,"path":"sprites/spr_missao/spr_missao.yy",},

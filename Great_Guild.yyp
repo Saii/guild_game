@@ -51,6 +51,7 @@
     {"id":{"name":"spr_guild","path":"sprites/spr_guild/spr_guild.yy",},},
     {"id":{"name":"spr_hero_home","path":"sprites/spr_hero_home/spr_hero_home.yy",},},
     {"id":{"name":"spr_heroi","path":"sprites/spr_heroi/spr_heroi.yy",},},
+    {"id":{"name":"spr_heroi_1","path":"sprites/spr_heroi_1/spr_heroi_1.yy",},},
     {"id":{"name":"spr_iniciar_missao","path":"sprites/spr_iniciar_missao/spr_iniciar_missao.yy",},},
     {"id":{"name":"spr_Inventory_Box","path":"sprites/spr_Inventory_Box/spr_Inventory_Box.yy",},},
     {"id":{"name":"spr_missao","path":"sprites/spr_missao/spr_missao.yy",},},

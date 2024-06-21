@@ -2,10 +2,35 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 para obter mais informações
 function Heroi() constructor {
 
+
+			
+  
 	_heroi= [];
+	_heroi_alocado=[];
+	
 	
 	heroi_set = function(_nome,_classe,_level,_rank,_forca,_velocidade,_inteligencia,_sorte,_salario,_sprite){
 		array_push( _heroi,{
+			
+			heroi_id: global.heroi_id++,
+			nome: _nome,
+			classe: _classe,
+			level: _level,
+			rank: _rank,
+			forca: _forca,
+			velocidade: _velocidade,
+			inteligencia: _inteligencia,
+			sorte: _sorte,
+			salario: _salario,
+			sprite: _sprite
+		
+		
+		});
+	
+	}
+	
+	heroi_alocado_set = function(_nome,_classe,_level,_rank,_forca,_velocidade,_inteligencia,_sorte,_salario,_sprite){
+		array_push( _heroi_alocado,{
 			nome: _nome,
 			classe: _classe,
 			level: _level,
@@ -103,7 +128,29 @@ return false;
 
 }
 
+heroi_get_sprite = function (slotDrag){
+var _index = slotDrag
+
+if( _index >=0 ) {
+return _heroi[slotDrag].sprite
+
+
+}
+
+return false;
+
+}
+
 heroi_swap = function (slotFrom,slotTo){
+//var _index = _heroi_find(_nome)
+var _itemFrom = _heroi[slotFrom];
+show_debug_message(_itemFrom);
+_heroi[slotFrom]= _heroi[slotTo]
+_heroi[slotTo] = _itemFrom;
+
+}
+
+heroi_swap_alocado_comprado = function (slotFrom,slotTo,comprado,alocado){
 //var _index = _heroi_find(_nome)
 var _itemFrom = _heroi[slotFrom];
 show_debug_message(_itemFrom);

@@ -5,7 +5,7 @@
 
 missao_numero = noone;
 mostrar_descricao=noone;
-
+objeto="Objeto Iniciar Missao"
 display_set_gui_size(1280, 720);
 
 inventory_columns_heroi = 3;
@@ -36,7 +36,7 @@ if (_check and mouse_check_button_released(mb_left) and global.iniciar_missao=fa
 
 global.iniciar_missao=true
 global.alocar_missao_ui=true
-
+obj_mouse.objetoAtual =objeto;
 }
 
 }

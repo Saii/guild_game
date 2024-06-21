@@ -141,7 +141,8 @@ for (var row = 0; row < inventory_rows; row++) {
 		if(heroi_index <= array_length(heroi_numero) - 1) {
 			// draw inventory sprite
 			draw_set(c_white, 1);
-			draw_text( pos_x + ui_inventory_box/2, pos_y+ ui_inventory_box/2,heroi_numero[heroi_index].nome);
+			//draw_text( pos_x + ui_inventory_box/2, pos_y+ ui_inventory_box/2,heroi_numero[heroi_index].nome);
+			draw_sprite_stretched(heroi_numero[heroi_index].sprite,image_index,pos_x + 4, pos_y+ ui_inventory_box/8,64,64)
 			draw_reset();
 
 		}

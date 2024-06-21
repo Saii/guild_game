@@ -5,11 +5,24 @@ randomize();
 
 heroi = new Heroi();
 herois_adquiridos = noone;
+herois_alocados = new Heroi();
 mostrar_descricao_heroi=noone;
+objeto= "Objeto_Heroi"
+
+
+herois_alocados.heroi_add("Fulano","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
+herois_alocados.heroi_add("Fulano 2","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1);
+herois_alocados.heroi_add("Fulano 3","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
+herois_alocados.heroi_add("Fulano 4","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1);
+herois_alocados.heroi_add("Fulano 5","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
+herois_alocados.heroi_add("Fulano 6","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1)
+
 heroi.heroi_add("Fulano","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
-heroi.heroi_add("Fulano 2","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
-
-
+heroi.heroi_add("Fulano 2","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1);
+heroi.heroi_add("Fulano 3","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
+heroi.heroi_add("Fulano 4","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1);
+heroi.heroi_add("Fulano 5","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
+heroi.heroi_add("Fulano 6","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1);
 
 
 status_herois= {
@@ -57,7 +70,7 @@ if (_check and mouse_check_button_released(mb_left) and global.janela_heroi_fech
 global.janela_heroi=true
 global.janela_heroi_fechada=true;
 global.heroi_ui=true;
-
+obj_mouse.objetoAtual =objeto;
 }
 
 }

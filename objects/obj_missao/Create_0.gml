@@ -9,13 +9,20 @@ missao= new Missao();
 missao_comprada = new Missao();
 missao_numero = noone;
 mostrar_descricao=noone;
-missao.missao_set("Missao F","Colher flor",3,20,10,false);
+
+missao.missao_set("Missao F","Colher flor",1,20,10,false);
 missao.missao_set("Missao E","Matar Orc",2,30,20,false);
-missao.missao_set("Missao D","Matar Ogro",2,100,30,false);
-missao.missao_set("Missao C","Lidar com gangue de mercenarios",2,100,40,false);
-missao.missao_set("Missao B","Matar Dragão",2,100,50,false);
-missao.missao_set("Missao A","Liderar um exercito",2,100,60,false);
-show_debug_message(missao.missao_get())
+missao.missao_set("Missao D","Matar Ogro",3,100,30,false);
+missao.missao_set("Missao C","Lidar com gangue de mercenarios",4,100,40,false);
+missao.missao_set("Missao B","Matar Dragão",5,100,50,false);
+missao.missao_set("Missao A","Liderar um exercito",6,100,60,false);
+
+missao_comprada.missao_comprada_set("Missao A","Liderar um exercito",6,100,60,false)
+missao_comprada.missao_add_heroi();
+//show_debug_message(missao.missao_get())
+show_debug_message(missao_comprada.missao_comprada_get())
+
+
 display_set_gui_size(1280, 720);
 
 inventory_columns = 3;
