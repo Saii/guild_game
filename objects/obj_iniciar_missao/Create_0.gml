@@ -5,7 +5,10 @@
 
 missao_numero = noone;
 mostrar_descricao=noone;
+forca_missao=noone;
+
 objeto="Objeto Iniciar Missao"
+
 display_set_gui_size(1280, 720);
 
 inventory_columns_heroi = 3;
@@ -27,6 +30,8 @@ color_inventory_text = c_white;
 color_inventory_highlight = c_white;
 
 
+
+
 janela_iniciar_missao = function() {
 
 var _check = position_meeting(mouse_x,mouse_y,obj_iniciar_missao)
@@ -37,6 +42,7 @@ if (_check and mouse_check_button_released(mb_left) and global.iniciar_missao=fa
 global.iniciar_missao=true
 global.alocar_missao_ui=true
 obj_mouse.objetoAtual =objeto;
+
 }
 
 }
@@ -48,7 +54,7 @@ janela_selecionar_missao_iniciar = function(){
 var mx = device_mouse_x_to_gui(0);
 var my = device_mouse_y_to_gui(0);
 	
-var missao_comprada_numero = obj_missao.missao_comprada.missao_get();
+var missao_comprada_numero = obj_missao.missao.missao_get();
 var pos_x = 0;
 var pos_y = 0;
 
@@ -97,6 +103,28 @@ if(mouse_check_button_released(mb_left) and global.alocar_missao_ui==true) {
 
 }
 
+}
+
+enviar_missao = function (){
+missao_numero = obj_missao.missao.missao_get();
+heroi_numero= obj_herois.heroi.heroi_get();
+
+if(keyboard_check_released(vk_enter)){
+for ( var missoes_compradas_array =0; missoes_compradas_array < array_length(missao_numero);missoes_compradas_array++){
+	forca_missao=0;
+	for( var herois_comprados_array=0; herois_comprados_array <array_length(heroi_numero); herois_comprados_array++){
+		if(missao_numero[missoes_compradas_array].missao_comprada==true){
+				if(missao_numero[missoes_compradas_array].missao_id==heroi_numero[herois_comprados_array].id_missao){
+				forca_missao += heroi_numero[herois_comprados_array].forca
+				show_debug_message("A forca da missao " +string(forca_missao) + "NOME DA MISSAO " + string(missao_numero[missoes_compradas_array].nome))
+				}
+
+			}
+
+}
+}
+
+}
 }
 
 

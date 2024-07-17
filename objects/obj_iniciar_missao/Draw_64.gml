@@ -37,6 +37,8 @@ draw_rectangle(
 	false
 );
 
+
+
 // draw horizontal line
 draw_set(color_border, 1);
 draw_rectangle(
@@ -109,8 +111,10 @@ draw_text(mouse_x-60,mouse_y,mx)
 draw_set(-1)
 
 
+#region Desenhar inventários Linhas
+
 // draw inventory place holders
-missao_numero = obj_missao.missao_comprada.missao_comprada_get();
+missao_numero = obj_missao.missao.missao_get();
 heroi_numero = obj_herois.heroi.heroi_get();
 
 for (var row = 0; row < inventory_rows_missao; row++) {
@@ -138,9 +142,11 @@ for (var row = 0; row < inventory_rows_missao; row++) {
 		
 		//
 		var missao_index = (row * inventory_columns_missao) + column;
-		if(missao_index <= array_length(missao_numero) - 1) {
+	
+		var comprei_missao = missao_numero[missao_index].missao_comprada
+		if((missao_index <= array_length(missao_numero) - 1)and (comprei_missao==true)) {
 			// draw inventory sprite
-			var pos_z = ui_padding_y + (ui_border_size * 13) +	(missao_numero[missao_index].requisito_heroi_numero * (ui_inventory_margin + ui_inventory_box));
+			
 			
 			draw_set(c_white, 1);
 			draw_text( pos_x + ui_inventory_box/2, pos_y+ ui_inventory_box/2,missao_numero[missao_index].nome);
@@ -167,46 +173,50 @@ for (var row = 0; row < inventory_rows_missao; row++) {
 	}
 }
 
+#endregion
+
+#region Desenhar os slots de herois para as missões
 // Desenhar os slots de herois para as missões
 
 for ( var missoes_compradas_array =0; missoes_compradas_array < array_length(missao_numero);missoes_compradas_array++){
-	for (var row = 0; row < array_length(missao_numero); row++) {
-		var pos_y = ui_padding_y + (ui_border_size * 13) +	(row * (ui_inventory_margin + ui_inventory_box));
-
-
-   for (var column = 0; column < missao_numero[row].requisito_heroi_numero; column++) {
-		var pos_x = ui_padding_x + ui_border_size + (ui_inventory_padding*2) + (column * (ui_inventory_margin + ui_inventory_box)) + ui_inventory_box;
-		
-		// draw offset sprite for shadow
-		draw_sprite_ext(
-			spr_Inventory_Box,
-			0,
-			pos_x + 4,
-			pos_y + 4,
-			1,
-			1,
-			0,
-			c_black,
-			0.4
-		);
-		
-		// draw inventory box sprite
-		//if(column <= missao_numero[missoes_compradas_array].requisito_heroi_numero){
-		draw_sprite_stretched_ext(spr_Inventory_Box, 0, pos_x, pos_y,64,64,c_white,1);
-		
-		//}
-		//
-		
-		//show_debug_message("A missao_compradas_array index eh: " + string(missoes_compradas_array))
-		//show_debug_message("A Row eh: " + string(row))
-		//show_debug_message("A Column eh: " + string(column))
-		//show_debug_message("A missao_compradas_array index eh: " + string(missoes_compradas_array))
-		//show_debug_message("A missao numero [] eh: " + string(missao_numero[missoes_compradas_array].requisito_heroi_numero))
-		
 	
+	if(missao_numero[missoes_compradas_array].missao_comprada ==true){
+		var pos_y = ui_padding_y + (ui_border_size * 13) +	(missoes_compradas_array * (ui_inventory_margin + ui_inventory_box));
+	
+		for (var column = 0; column < missao_numero[missoes_compradas_array].requisito_heroi_numero; column++) {
+		var pos_x = ui_padding_x + ui_border_size + (ui_inventory_padding*2) + (column * (ui_inventory_margin + ui_inventory_box)) + ui_inventory_box;
+		draw_sprite_stretched_ext(spr_Inventory_Box, 0, pos_x, pos_y,64,64,c_white,1);
+		}
+	}
+	//for (var row = 0; row < array_length(missao_numero); row++) {
+	//	var pos_y = ui_padding_y + (ui_border_size * 13) +	(row * (ui_inventory_margin + ui_inventory_box));
+
+
+   //for (var column = 0; column < missao_numero[row].requisito_heroi_numero; column++) {
+	//	var pos_x = ui_padding_x + ui_border_size + (ui_inventory_padding*2) + (column * (ui_inventory_margin + ui_inventory_box)) + ui_inventory_box;
 		
 		
-		//// if our mouse is between one of the columns let's highlight it
+		
+	//	// draw inventory box sprite
+	//	if(row < missao_numero[missoes_compradas_array].requisito_heroi_numero and missao_numero[missoes_compradas_array].missao_comprada ==true ){
+	//	// draw offset sprite for shadow
+	//	show_debug_message("row " + string(row))
+	//	show_debug_message("column " + string(column))
+	//	show_debug_message("missoes_compradas_array " + string(missoes_compradas_array))
+	//	show_debug_message("missoes_compradas_requisito" + string(missao_numero[missoes_compradas_array].requisito_heroi_numero))
+	//	draw_sprite_ext(
+	//		spr_Inventory_Box,
+	//		0,
+	//		pos_x + 4,
+	//		pos_y + 4,
+	//		1,
+	//		1,
+	//		0,
+	//		c_black,
+	//		0.4
+	//	);
+	//	draw_sprite_stretched_ext(spr_Inventory_Box, 0, pos_x, pos_y,64,64,c_white,1);
+			//// if our mouse is between one of the columns let's highlight it
 		if(is_between(mx, pos_x, pos_x + ui_inventory_box)) {
 			if(is_between(my, pos_y, pos_y + ui_inventory_box)) {
 				draw_set(color_inventory_highlight, 0.2);
@@ -220,52 +230,102 @@ for ( var missoes_compradas_array =0; missoes_compradas_array < array_length(mis
 				draw_reset();
 				}
 			}
-				
 		}
-	}
-}
+		//
+		
+		//show_debug_message("A missao_compradas_array index eh: " + string(missoes_compradas_array))
+		//show_debug_message("A Row eh: " + string(row))
+		//show_debug_message("A Column eh: " + string(column))
+		//show_debug_message("A missao_compradas_array index eh: " + string(missoes_compradas_array))
+		//show_debug_message("A missao numero [] eh: " + string(missao_numero[missoes_compradas_array].requisito_heroi_numero))
+		
+	
+		
+		
+	
+				
+//		}
+//	}
+//}
 
 //Fim desenho Slot missoes
 
+#endregion
 
+#region Desenhar os sprites do heroi 
 //  Inicio Desenhar os slots de herois para alocar nas missões
 
-for ( var missoes_compradas_array =0; missoes_compradas_array < array_length(missao_numero);missoes_compradas_array++){
+heroi_numero = obj_herois.heroi.heroi_get();
+
 	
 	for (var row = 0; row < array_length(missao_numero); row++) {
 		var pos_y = ui_padding_y + (ui_border_size * 13) +	(row * (ui_inventory_margin + ui_inventory_box));
-
-
-   for (var column = 0; column < missao_numero[row].requisito_heroi_numero; column++) {
-		var pos_x = ui_padding_x + ui_border_size + (ui_inventory_padding*2) + (column * (ui_inventory_margin + ui_inventory_box)) + ui_inventory_box;
+		//show_debug_message("A linha eh " + string (row) )
 		
-		
-		
+		if(missao_numero[row].missao_comprada==true){
+		heroi_alocado[row] = obj_herois.heroi.heroi_find_missao(missao_numero[row].missao_id);
+		//show_debug_message("O heroi alocado eh o " + string(heroi_alocado[row]));
+		//show_debug_message("O tamnho do array do heroi alocado eh " + string(array_length(heroi_alocado[row])))
 	
-	
-	
-	var heroi_index = (column);
-	var missao_index = array_length(missao_numero)
-
-	
-		if(heroi_index <= missao_numero[row].requisito_heroi_numero - 1) {
+	for (var column = 0; column < array_length(heroi_alocado[row]); column++) {
+				var pos_x = ui_padding_x + ui_border_size + (ui_inventory_padding*2) + (column * (ui_inventory_margin + ui_inventory_box)) + ui_inventory_box;
+		show_debug_message("A Coluna eh " + string (column) )
+			//for ( var missoes_compradas_array =0; missoes_compradas_array < array_length(heroi_alocado[row]);missoes_compradas_array++){
+			//show_debug_message("A missoes compradas array " + string (column) )
+			//show_debug_message("O heroi alocado eh " + string (heroi_alocado[row][column]) )
+			//show_debug_message("A missao id da row eh" + string (missao_numero[row].missao_id) )
+			heroi_id_missao = obj_herois.heroi.heroi_get_missao_id(heroi_alocado[row][column])
+			//show_debug_message("A missao id do heroi eh" + string (heroi_id_missao) )
+		if(heroi_id_missao==missao_numero[row].missao_id){
+				
+				var new_id_heroi = heroi_alocado[row][column]
+				//show_debug_message("O ID do Heroi Alocado eh   " + string(heroi_alocado[row][column]))
+				//show_debug_message("Missao comprada Array  " + string(column))
+				//show_debug_message("O Id da Missao do Heroi numero missoes compradas  " + string(heroi_numero[column].id_missao))
+				//show_debug_message("Id Missao " + string(heroi_numero[missoes_compradas_array].id_missao))
+				//show_debug_message("Missao Id do missao numero[row]" + string (missao_numero[row].missao_id));
+				//show_debug_message("Row" + string (row));
+				//show_debug_message("Column" + string (column));
+				
+				sprite = obj_herois.heroi.heroi_get_sprite_id(new_id_heroi)
+				nome =obj_herois.heroi.heroi_get_nome_id(new_id_heroi)
+				//show_debug_message(sprite)
+				//show_debug_message(nome)
+			if(  sprite != -1){
+			draw_sprite_stretched(sprite,image_index,pos_x,pos_y,64,64);
+			show_debug_message("Desenhando o " + string(nome) + " " + "que tem a sprite "+ string(sprite))
 			
+				
+				}
+			
+			}
 			// É necessário adicionar um loop para ir até o index existente dentro do heroi alocado para ver
 			//se existe um sprite ou não dentro do heroi alocado
 			
-			sprite = missao_numero[row].heroi_alocado[heroi_index].sprite
-			if(  sprite != -1){
-			draw_sprite_stretched(missao_numero[row].heroi_alocado[heroi_index].sprite,image_index,pos_x,pos_y,64,64)
-			}
 			
+			
+			
+			
+		//}
+	}
+		
+		
 		}
+
+		
 	
 				
-		}
-	}
 }
+	
+
 
 //Fim desenho Slot Heroi nas missoes
+
+#endregion
+
+#region Desenhar o slot de herois COMPRADOS
+
+//Herois
 
 for (var row = 0; row < inventory_rows_heroi; row++) {
 	var pos_y = ui_padding_y + (ui_border_size * 13) +	(row * (ui_inventory_margin + ui_inventory_box));
@@ -292,7 +352,10 @@ for (var row = 0; row < inventory_rows_heroi; row++) {
 		//show_debug_message("POS Y" + string(pos_y))
 		//
 		var heroi_index = (row * inventory_columns_heroi) + column;
-		if(heroi_index <= array_length(heroi_numero) - 1) {
+		//show_debug_message("Heroi Index" + string(heroi_index))
+		//show_debug_message("Heroi Index" + string(row))
+		//show_debug_message("Heroi Index" + string(column))
+		if((heroi_index <= array_length(heroi_numero) - 1 )and heroi_numero[heroi_index].id_missao==missao_numero[row].missao_id) {
 			// draw inventory sprite
 			
 			draw_sprite_stretched(heroi_numero[heroi_index].sprite,image_index,pos_x + 4, pos_y+ ui_inventory_box/8,64,64)
@@ -320,6 +383,8 @@ for (var row = 0; row < inventory_rows_heroi; row++) {
 		
 	}
 }
+	
+#endregion
 
 var _missao = obj_missao.missao_comprada.missao_get();
 var pos_x = ui_padding_x + (ui_border_size * 10);

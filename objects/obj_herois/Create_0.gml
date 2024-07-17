@@ -10,20 +10,32 @@ mostrar_descricao_heroi=noone;
 objeto= "Objeto_Heroi"
 
 
-herois_alocados.heroi_add("Fulano","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
-herois_alocados.heroi_add("Fulano 2","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1);
-herois_alocados.heroi_add("Fulano 3","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
-herois_alocados.heroi_add("Fulano 4","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1);
-herois_alocados.heroi_add("Fulano 5","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
-herois_alocados.heroi_add("Fulano 6","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1)
+//herois_alocados.heroi_add("Fulano","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
+//herois_alocados.heroi_add("Fulano 2","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1);
+//herois_alocados.heroi_add("Fulano 3","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
+//herois_alocados.heroi_add("Fulano 4","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1);
+//herois_alocados.heroi_add("Fulano 5","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
+//herois_alocados.heroi_add("Fulano 6","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1)
 
 heroi.heroi_add("Fulano","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
 heroi.heroi_add("Fulano 2","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1);
-heroi.heroi_add("Fulano 3","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
+heroi.heroi_add("Fulano 3","Arqueiro",1,"D",15,10,10,10,10,spr_heroi);
 heroi.heroi_add("Fulano 4","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1);
 heroi.heroi_add("Fulano 5","Arqueiro",1,"D",10,10,10,10,10,spr_heroi);
 heroi.heroi_add("Fulano 6","Arqueiro",1,"D",10,10,10,10,10,spr_heroi_1);
+//show_message(heroi)
+teste = heroi.heroi_find_id(0)
+teste2= heroi.heroi_find_id(1)
+teste3= heroi.heroi_find_id(2)
+teste4= heroi.heroi_find_id(3)
 
+heroi.heroi_add_missao(teste,1)
+heroi.heroi_add_missao(teste2,2)
+heroi.heroi_add_missao(teste3,3)
+heroi.heroi_add_missao(teste4,3)
+//show_message(heroi.heroi_get())
+
+//show_message(heroi.heroi_find_missao(3))
 
 status_herois= {
 nome:"Nome",

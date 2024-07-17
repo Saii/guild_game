@@ -10,12 +10,14 @@ function Missao() constructor{
 	
 	missao_set = function(_nome,_descricao,_requisito,_recompensa,_custo,_desenhar=false){
 		array_push( _missao,{
+		missao_id: global.missao_id++,
 		nome:_nome,
 		descricao:_descricao,
 		requisito_heroi_numero:_requisito,
 		recompensa:_recompensa,
-		desenhar: _desenhar,
-		custo: _custo
+		missao_comprada: _desenhar,
+		custo: _custo,
+		heroi_alocado: [],
 		
 		});
 	
@@ -32,13 +34,18 @@ function Missao() constructor{
 		heroi_alocado: []
 		
 		});
-	
+	show_message(_missao_comprada)
 	}
 	
-	missao_add_heroi = function(){
-		//var _index = missao_comprada_find(_nome);
+	missao_add_heroi = function(missao_id){
+		var _index = missao_find_id(missao_id);
+		var _requisito_heroi = _missao[_index].requisito_heroi_numero
+		//show_message("O index de add heroi eh " + string(_index))
+		//show_message("O _requisito heroi eh " + string(_requisito_heroi))
 		
-		_missao_comprada[0].heroi_alocado[0]={
+		for(var _index_heroi =0; _index_heroi < _requisito_heroi; _index_heroi++){
+		show_debug_message("funcionou")
+		_missao[_index].heroi_alocado[_index_heroi]={
 		nome: "Fulano 0",
 			classe: "Arqueiro",
 			level: 1,
@@ -48,75 +55,12 @@ function Missao() constructor{
 			inteligencia: 12,
 			sorte: 13,
 			salario: 20,
-			sprite: spr_heroi
-		
-		};
-_missao_comprada[0].heroi_alocado[1]={
-		nome: "Fulano 1",
-			classe: "Arqueiro",
-			level: 1,
-			rank: "E",
-			forca: 10,
-			velocidade: 11,
-			inteligencia: 12,
-			sorte: 13,
-			salario: 20,
-			sprite: spr_heroi
-		
-		};
-		_missao_comprada[0].heroi_alocado[2]={
-		nome: "Fulano 2",
-			classe: "Arqueiro",
-			level: 1,
-			rank: "E",
-			forca: 10,
-			velocidade: 11,
-			inteligencia: 12,
-			sorte: 13,
-			salario: 20,
-			sprite: spr_heroi
-		
-		};
-		_missao_comprada[0].heroi_alocado[3]={
-		nome: "Fulano 3",
-			classe: "Arqueiro",
-			level: 1,
-			rank: "E",
-			forca: 10,
-			velocidade: 11,
-			inteligencia: 12,
-			sorte: 13,
-			salario: 20,
-			sprite: spr_heroi
-		
-		};
-		_missao_comprada[0].heroi_alocado[4]={
-		nome: "Fulano 4",
-			classe: "Arqueiro",
-			level: 1,
-			rank: "E",
-			forca: 10,
-			velocidade: 11,
-			inteligencia: 12,
-			sorte: 13,
-			salario: 20,
-			sprite: spr_heroi
-		
-		};
-		_missao_comprada[0].heroi_alocado[5]={
-		nome: "Fulano 4",
-			classe: "Arqueiro",
-			level: 1,
-			rank: "E",
-			forca: 10,
-			velocidade: 11,
-			inteligencia: 12,
-			sorte: 13,
-			salario: 20,
-			sprite: spr_heroi
+			sprite: spr_heroi,
+			id_missao: missao_id
 		
 		};
 	
+	}
 	}
 	
 	missao_find = function (_nome){
@@ -131,10 +75,50 @@ _missao_comprada[0].heroi_alocado[1]={
 	
 	}
 	
+		missao_find_id = function (_missao_id){
+		for (var i=0; i < array_length(_missao);i++){
+			
+			if(_missao_id == _missao[i].missao_id){
+			return i;
+			}
+		
+		}
+	return -1;
+	
+	}
+	
+missao_find_missao_comprada = function (){
+		_missao_comprada=[];
+		for (var i=0; i < array_length(_missao);i++){
+			
+			if(_missao[i].missao_comprada){
+			
+			array_push(_missao_comprada,_missao[i].missao_id)
+			
+			}
+		
+		}
+	return _missao_comprada;
+	
+	}
+
+
 	missao_comprada_find = function (_nome){
 		for (var i=0; i < array_length(_missao_comprada);i++){
 			
 			if(_nome == _missao_comprada[i].nome){
+			return i;
+			}
+		
+		}
+	return -1;
+	
+	}
+	
+	missao_comprada_find_id = function (_missao_id){
+		for (var i=0; i < array_length(_missao_comprada);i++){
+			
+			if(_missao_id == _missao_comprada[i].missao_id){
 			return i;
 			}
 		
@@ -150,15 +134,41 @@ toString = function (){
 }
 
 
+missao_comprada_heroi_get_sprite = function (slotDrag,rowHover){
+var _index = slotDrag
+var _row = rowHover
+if( _index >=0 ) {
+show_debug_message(_missao_comprada[_row].heroi_alocado[_index].sprite)
+return _missao_comprada[_row].heroi_alocado[_index].sprite
 
 
+}}
 
-missao_subtract = function(_nome){
-var _index = missao_find(_nome);
+trocar_missao = function (inventoryDrag,inventoryHover,rowHover,columnHover,rowDrag,columnDrag){
+
+var _itemFrom = _missao_comprada[rowDrag].heroi_alocado[columnDrag];
+var _item_temp= _missao_comprada[rowHover].heroi_alocado[columnHover];
+show_debug_message(rowDrag)
+show_debug_message(columnDrag)
+show_debug_message(_itemFrom)
+show_debug_message(rowHover)
+show_debug_message(columnHover)
+show_debug_message(_item_temp)
+
+_missao_comprada[rowHover].heroi_alocado[columnHover] = _itemFrom;
+_missao_comprada[rowDrag].heroi_alocado[columnDrag]=_item_temp;
+
+}
+
+
+missao_subtract = function(_missao_id){
+var _index = missao_find_id(_missao_id);
+show_debug_message("O Index de missao subtract eh " + string(_index))
+show_debug_message("O ID de missao subtract eh " + string(_missao_id))
 
 if(_index >=0) {
 		
-	if ( _missao[_index].nome ==true){
+	if ( _missao[_index].missao_id==_missao_id){
 	missao_remove(_index);
 	
 	}
@@ -179,14 +189,13 @@ missao_comprada_get = function (){
 return _missao_comprada;
 }
 
-missao_comprar = function (_nome,_missao_comprada_array){
-var _index = missao_find(_nome);
-show_message(global.dinheiro)
-if(_index>=0 and global.dinheiro >= _missao[_index].custo){
+missao_comprar = function (_missao_id){
+var _index = missao_find_id(_missao_id);
+//show_message("O index da missao a ser comprada eh " + string(_index))
+if(_index>=0 and global.dinheiro >= _missao[_index].custo and _missao[_index].missao_comprada==false ){
 global.dinheiro -= _missao[_index].custo;
-_missao_comprada_array.missao_comprada_set(_missao[_index].nome,_missao[_index].descricao,_missao[_index].requisito_heroi_numero,_missao[_index].custo,_missao[_index].desenhar);
-missao_remove(_index);
-show_message(global.dinheiro)
+_missao[_index].missao_comprada=true;
+//show_message(global.dinheiro)
 }
 
 }

@@ -17,10 +17,13 @@ missao.missao_set("Missao C","Lidar com gangue de mercenarios",4,100,40,false);
 missao.missao_set("Missao B","Matar Dragão",5,100,50,false);
 missao.missao_set("Missao A","Liderar um exercito",6,100,60,false);
 
-missao_comprada.missao_comprada_set("Missao A","Liderar um exercito",6,100,60,false)
-missao_comprada.missao_add_heroi();
+//missao_comprada.missao_comprada_set("Missao A","Liderar um exercito",6,100,60,false)
+//missao.missao_add_heroi(1)
+//missao.missao_add_heroi(2)
 //show_debug_message(missao.missao_get())
-show_debug_message(missao_comprada.missao_comprada_get())
+
+
+//show_debug_message(missao_comprada.missao_comprada_get())
 
 
 display_set_gui_size(1280, 720);
@@ -55,11 +58,11 @@ global.missao_ui=true
 
 }
 
-comprar_missao = function (_nome,_missao_comprada_array){
+comprar_missao = function (_missao_id){
 
 
-missao.missao_comprar(_nome,_missao_comprada_array);
-show_message(missao_comprada)
+missao.missao_comprar(_missao_id);
+show_message("Comprou missao " + string(_missao_id))
 }
 
 janela_missao_selecionar = function () {
@@ -87,7 +90,11 @@ if(mouse_check_button(mb_left) and global.missao_ui==true) {
 							
 							mostrar_descricao = missao_numero[missao_index];
 							global.missao_aberta=true;
-							comprar_missao(mostrar_descricao.nome,missao_comprada);
+							show_message("A descrição da missao eh " + string(mostrar_descricao))
+							show_message("O ID da missao eh" + string(mostrar_descricao.missao_id));
+							comprar_missao(mostrar_descricao.missao_id)
+							
+						
 						} else {						
 							show_debug_message("Sem missao aqui");
 						}

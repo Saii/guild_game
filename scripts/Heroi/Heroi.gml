@@ -22,7 +22,9 @@ function Heroi() constructor {
 			inteligencia: _inteligencia,
 			sorte: _sorte,
 			salario: _salario,
-			sprite: _sprite
+			sprite: _sprite,
+			desenhou: false,
+			id_missao:0
 		
 		
 		});
@@ -60,10 +62,49 @@ function Heroi() constructor {
 	
 	}
 	
+	
+	heroi_find_id = function (_heroi_id){
+		for (var i=0; i < array_length(_heroi);i++){
+			
+			if(_heroi_id == _heroi[i].heroi_id){
+			
+			return i;
+			}
+		
+		}
+	return -1;
+	
+	}
+	
+	heroi_find_missao = function (_missao_id){
+		_heroi_alocado=[];
+		for (var i=0; i < array_length(_heroi);i++){
+			
+			if(_missao_id == _heroi[i].id_missao){
+			
+			array_push(_heroi_alocado,_heroi[i].heroi_id)
+			
+			}
+		
+		}
+	return _heroi_alocado;
+	
+	}
+	
 	heroi_add = function (_nome,_classe,_level,_rank,_forca,_velocidade,_inteligencia,_sorte,_salario,_sprite){
 		
 		heroi_set(_nome,_classe,_level,_rank,_forca,_velocidade,_inteligencia,_sorte,_salario,_sprite);
 		
+}
+
+heroi_add_missao = function (heroi_id,missao_id){
+var _index = heroi_find_id(heroi_id);
+
+//show_debug_message("O index eh " + string(_index))
+//show_debug_message(missao_id)
+//show_message(_index)
+_heroi[_index].id_missao = missao_id
+return _heroi[_index].id_missao= missao_id;
 }
 
 toString = function (){
@@ -133,6 +174,45 @@ var _index = slotDrag
 
 if( _index >=0 ) {
 return _heroi[slotDrag].sprite
+
+
+}
+}
+
+heroi_get_sprite_id = function (_heroi_id){
+var _index = heroi_find_id(_heroi_id)
+
+if( _index >=0 ) {
+
+return _heroi[_index].sprite
+
+
+}
+
+return false;
+
+}
+
+heroi_get_nome_id = function (_heroi_id){
+var _index = heroi_find_id(_heroi_id)
+
+if( _index >=0 ) {
+
+return _heroi[_index].nome
+
+
+}
+
+return false;
+
+}
+
+heroi_get_missao_id = function (_heroi_id){
+var _index = heroi_find_id(_heroi_id)
+
+if( _index >=0 ) {
+
+return _heroi[_index].id_missao
 
 
 }

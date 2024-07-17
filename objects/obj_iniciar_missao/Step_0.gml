@@ -4,3 +4,4 @@
 janela_iniciar_missao();
 janela_selecionar_missao_iniciar();
 fechar_iniciar_missao();
+enviar_missao();

@@ -3,6 +3,7 @@
 
 global.dinheiro =300;
 global.heroi_id=0;
+global.missao_id=1;
 //variaveis do inventario
 global.inventario_aberto=false;
 global.inventario_fechado=false;

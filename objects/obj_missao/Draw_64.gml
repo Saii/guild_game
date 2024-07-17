@@ -136,11 +136,12 @@ for (var row = 0; row < inventory_rows; row++) {
 		//
 		var missao_index = (row * inventory_columns) + column;
 		if(missao_index <= array_length(missao_numero) - 1) {
+			if(missao_numero[missao_index].missao_comprada==false){
 			// draw inventory sprite
 			draw_set(c_white, 1);
 			draw_text( pos_x + ui_inventory_box/2, pos_y+ ui_inventory_box/2,missao_numero[missao_index].nome);
 			draw_reset();
-
+			}
 		}
 		
 		
